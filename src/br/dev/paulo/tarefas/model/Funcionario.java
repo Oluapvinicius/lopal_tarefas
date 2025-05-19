@@ -9,6 +9,7 @@ public class Funcionario {
 	public Funcionario(String nome) {
 	  this.nome = nome;
 	}
+	// Contrutor Padrão ou Default (que e a mesma coisa so que em linguagem diferente)
 	public Funcionario() {
 		
 	}
