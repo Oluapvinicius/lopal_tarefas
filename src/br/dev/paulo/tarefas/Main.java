@@ -8,31 +8,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.util.UUID;
 
+import br.dev.paulo.tarefas.dao.FuncionarioDAO;
 import br.dev.paulo.tarefas.model.Funcionario;
+import br.dev.paulo.tarefas.ui.FrameFuncionario;
+import br.dev.paulo.tarefas.utils.Utils;
 
 public class Main {
+	
+    
+    
+	
+	
+
 
 	static String path = "C:\\Users\\25132413\\ProjetoTarefas\\tarefas.txt";
 
 	public static void main(String[] args) {
 		
-		Funcionario funcionario1 = new Funcionario("Maria da silva");//Criação de um Objeto. Que herarquicamente é filho da Classe Object. //Mas no main Criamos um novo construtor
-		Funcionario funcionario2 = new Funcionario();
+	
+		new FrameFuncionario();
 		
-		funcionario2.setMatricula(9);
-		funcionario2.setNome("Patricia Gomes");
-		funcionario2.setCargo("Gerente de TI");
-		
-		Funcionario funcionario3 = new Funcionario("Progamador", "Maria");
-		Funcionario funcionario4 = new Funcionario("Progamador", "Pedro", 2);
-		
-		System.out.println(funcionario1);
-		System.out.println(funcionario2);
-		System.out.println(funcionario3);
-		System.out.println(funcionario4);
-		
-		System.out.println("Esse foi o video deixa o like fui..");
 	}
 
 	//	lerArquivo();
