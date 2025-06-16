@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,7 @@ public class FrameFuncionarioList {
 	
 	private JLabel labelTitulo;
 	private JButton btnCadastro;
+	private JButton btnSair;
 	private JTable tabelaFuncionarios;
 	private JScrollPane scrollFuncionarios;
 	private DefaultTableModel modelFuncionarios;
@@ -64,14 +66,30 @@ public class FrameFuncionarioList {
 		carregarDados();
 		
 		btnCadastro = new JButton("Cadastrar");
-		btnCadastro.setBounds(10, 380, 200, 40);
+		btnCadastro.setBounds(10, 380, 100, 40);
 		
+		btnSair = new JButton("SAIR");
+		btnSair.setBounds(120, 380, 100, 40);
+        btnSair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//JOptionPane.showMessageDialog(tela, "Fechando a aplicação", "Fechar", JOptionPane.);
+				int resposta = JOptionPane.showConfirmDialog(tela, "Confirma a saida do sistema??");
+				if(resposta == 0 ) {
+				System.exit(JFrame.HIDE_ON_CLOSE);
+				}
+			}
+		});
+        
+		painel.add(btnSair);
 		btnCadastro.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new FrameFuncionario(tela);
-				System.out.println("voltei");
+				new FrameFuncionario();
+				
 				
 			}
 		});
@@ -82,6 +100,9 @@ public class FrameFuncionarioList {
 		
 		tela.setVisible(true);
 	}
+	
+	
+	
 	
 	private void carregarDados() {
 		FuncionarioDAO dao = new FuncionarioDAO();
@@ -98,6 +119,8 @@ public class FrameFuncionarioList {
 		}
 		
 		modelFuncionarios.setDataVector(dados, colunas);
+		
+		
 	}
 	
 

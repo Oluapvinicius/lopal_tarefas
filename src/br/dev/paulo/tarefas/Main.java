@@ -1,6 +1,6 @@
 package br.dev.paulo.tarefas;
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +17,8 @@ import javax.swing.JFrame;
 import br.dev.paulo.tarefas.dao.FuncionarioDAO;
 import br.dev.paulo.tarefas.model.Funcionario;
 import br.dev.paulo.tarefas.ui.FrameFuncionario;
-import br.dev.paulo.tarefas.ui.FrameFuncionarioList;
+
+import br.dev.paulo.tarefas.ui.FrameInicial;
 import br.dev.paulo.tarefas.utils.Utils;
 
 public class Main {
@@ -32,7 +33,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-       new FrameFuncionarioList();
+		
+		      new FrameInicial();
+		   }
 		
 		
 //		FuncionarioDAO dao = new FuncionarioDAO();
@@ -45,7 +48,7 @@ public class Main {
 //	    }
 
 	}
-}
+
 	
 	//	lerArquivo();
 //		gravarArquivo();

@@ -30,7 +30,7 @@ public class FuncionarioDAO {
 			System.out.println("Seu usuario foi gravado com sucesso!");
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

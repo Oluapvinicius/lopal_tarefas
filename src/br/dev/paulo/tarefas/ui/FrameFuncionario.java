@@ -1,10 +1,12 @@
 package br.dev.paulo.tarefas.ui;
 
 import java.awt.Container;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,13 +33,13 @@ public class FrameFuncionario {
 	}
 	
 	private void criarTela() {
-		JFrame tela = new JFrame();
+		JDialog tela = new JDialog();
 		tela.setTitle("Cadastro");
 		tela.setSize(400, 400);
 		tela.setResizable(false);
-		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tela.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		tela.setLayout(null);
-		tela.setLocationRelativeTo(null);
+		tela.setLocationRelativeTo(tela);
 		
 		Container painel = tela.getContentPane();
 		
