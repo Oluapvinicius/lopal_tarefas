@@ -19,97 +19,101 @@ import javax.swing.table.DefaultTableModel;
 import br.dev.paulo.tarefas.dao.FuncionarioDAO;
 import br.dev.paulo.tarefas.model.Funcionario;
 
-
 public class FrameFuncionarioList {
-	
+
 	private JLabel labelTitulo;
 	private JButton btnCadastro;
-	private JButton btnSair;
 	private JTable tabelaFuncionarios;
 	private JScrollPane scrollFuncionarios;
 	private DefaultTableModel modelFuncionarios;
-	private String[] colunas = {"Código", "Nome", "Cargo", };
-	
-	public FrameFuncionarioList(JFrame frame) {
-		criarTela(frame);
+	private String[] colunas = { "CÓDIGO", "NOME", "CARGO" };
+	private JButton btnSair;
+
+	public FrameFuncionarioList(JFrame gerenciador) {
+		criarTela(gerenciador);
 	}
-	private void criarTela(JFrame frame) {
-		
-		JDialog tela = new JDialog(frame, true);
-		tela.setSize(500,500);
+
+	
+	private void criarTela(JFrame gerenciador) {
+		JDialog tela = new JDialog(gerenciador, true);
+		tela.setSize(500, 450);
 		tela.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		tela.setLayout(null);
-		tela.setLocationRelativeTo(frame);
+		tela.setLocationRelativeTo(gerenciador);
+		tela.setTitle("Lista de funcionários");
 		tela.setResizable(false);
-		
+
 		Container painel = tela.getContentPane();
+
+		labelTitulo = new JLabel("Cadastro de funcionarios");
+		labelTitulo.setFont(new Font("Candara", Font.BOLD, 27));
+		labelTitulo.setBounds(90, 10, 300, 40);
+
 		
-		labelTitulo = new JLabel("Cadastro de Funcionarios");
-		labelTitulo.setFont(new Font("Arial", Font.BOLD, 30));
-		labelTitulo.setForeground(Color.BLACK);
-		labelTitulo.setBounds(10,10,400,40);
-		
-		//Criação da Tabela
 		modelFuncionarios = new DefaultTableModel(colunas, 5) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				
 				return false;
 			}
 		};
-		
+
 		tabelaFuncionarios = new JTable(modelFuncionarios);
+
 		tabelaFuncionarios.getTableHeader().setReorderingAllowed(false);
 		scrollFuncionarios = new JScrollPane(tabelaFuncionarios);
-		scrollFuncionarios.setBounds(10, 60,460, 300);
-		
+		scrollFuncionarios.setBounds(10, 60, 460, 260);
+
 		carregarDados();
-		
+
 		btnCadastro = new JButton("Cadastrar");
-		btnCadastro.setBounds(10, 380, 100, 40);
-		
-		btnSair = new JButton("SAIR");
-		btnSair.setBounds(120, 380, 100, 40);
-        btnSair.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				//JOptionPane.showMessageDialog(tela, "Fechando a aplicação", "Fechar", JOptionPane.);
-				int resposta = JOptionPane.showConfirmDialog(tela, "Confirma a saida do sistema??");
-				if(resposta == 0 ) {
-				System.exit(JFrame.HIDE_ON_CLOSE);
-				}
-			}
-		});
-        
-		painel.add(btnSair);
+		btnCadastro.setBounds(75, 350, 200, 40);
+
 		btnCadastro.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new FrameFuncionario();
-				
-				
+
+				new FrameFuncionario(tela);
+				carregarDados();
+
 			}
 		});
-		
-		painel.add(scrollFuncionarios);
+
+		btnSair = new JButton("Sair");
+		btnSair.setBounds(300, 350, 80, 40);
+
+		btnSair.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				int resposta = JOptionPane.showConfirmDialog(null, "Deseja continuar?", "Confirmação",
+						JOptionPane.YES_NO_OPTION);
+				if (resposta == 0) {
+					tela.dispose();
+
+				}
+
+			}
+		});
+
 		painel.add(labelTitulo);
+		painel.add(scrollFuncionarios);
 		painel.add(btnCadastro);
-		
+		painel.add(btnSair);
+
 		tela.setVisible(true);
+
 	}
-	
-	
-	
-	
+
 	private void carregarDados() {
 		FuncionarioDAO dao = new FuncionarioDAO();
-		List<Funcionario> funcionarios = dao.Listar();
-		
-		Object[][] dados = new Object [funcionarios.size()][3];		
-		
+		List<Funcionario> funcionarios = dao.listar();
+
+		Object[][] dados = new Object[funcionarios.size()][3];
+
 		int i = 0;
 		for (Funcionario f : funcionarios) {
 			dados[i][0] = f.getMatricula();
@@ -117,11 +121,8 @@ public class FrameFuncionarioList {
 			dados[i][2] = f.getCargo();
 			i++;
 		}
-		
+
 		modelFuncionarios.setDataVector(dados, colunas);
-		
-		
 	}
-	
 
 }

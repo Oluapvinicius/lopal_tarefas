@@ -32,11 +32,11 @@ public class Main {
 	static String path = "C:\\Users\\25132413\\ProjetoTarefas\\tarefas.txt";
 
 	public static void main(String[] args) {
-		
-		
-		      new FrameInicial();
-		   }
-		
+
+		new FrameInicial();
+
+	}
+
 		
 //		FuncionarioDAO dao = new FuncionarioDAO();
 //	    List<Funcionario> funcionarios = dao.Listar();

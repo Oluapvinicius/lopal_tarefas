@@ -10,51 +10,50 @@ import br.dev.paulo.tarefas.model.Funcionario;
 
 public class FuncionarioDAO {
 
-	private Funcionario funcionario; // Criando um atributo Funcionario.
+	private Funcionario funcionario;
 
-	// Criando dois construtores
 	public FuncionarioDAO() {
-	} // construtor DEFAULT
+		this.getNomesFuncionarios();
+	}
 
 	public FuncionarioDAO(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
 
-	// Criando o metodo gravar
-	// CRUD
 	public void gravar() {
 		try {
 			FileFactory ff = new FileFactory();
-			ff.getBufferedWriter().write(funcionario.toString());
-			ff.getBufferedWriter().flush();
-			System.out.println("Seu usuario foi gravado com sucesso!");
+			ff.getBufferWriterFuncionarios().write(funcionario.toString());
+			ff.getBufferWriterFuncionarios().flush();
 
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
+
 	}
 
-	public List<Funcionario> Listar() {
+	public List<Funcionario> listar() {
+
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
 		try {
 			FileFactory ff = new FileFactory();
-			BufferedReader br = ff.getBufferedReader();
+			BufferedReader br = ff.getBufferedReaderFuncionarios();
 
 			String linha = "";
 
 			br.readLine();
 
 			while (linha != null) {
-				// extraindo uma linha diferente
+				
 				linha = br.readLine();
+				System.out.println(linha);
 
-				// Criando um vetor
+				
 				if (linha != null) {
 					String funcionarioStr[] = linha.split(",");
 
-					// Criando um objeto funcionario
+					
 					Funcionario funcionario = new Funcionario();
 					funcionario.setMatricula(funcionarioStr[0]);
 					funcionario.setNome(funcionarioStr[1]);
@@ -65,12 +64,25 @@ public class FuncionarioDAO {
 				}
 
 			}
+
 			return funcionarios;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+
+	}
+
+	public String[] getNomesFuncionarios() {
+		List<Funcionario> funcionarios = listar(); 
+		String[] nomes = new String[funcionarios.size()];
+
+		for (int i = 0; i < funcionarios.size(); i++) {
+			nomes[i] = funcionarios.get(i).getNome();
+		}
+
+		return nomes;
 	}
 
 }

@@ -1,0 +1,75 @@
+package br.dev.paulo.tarefas.dao;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.dev.paulo.tarefas.factory.FileFactory;
+import br.dev.paulo.tarefas.model.Tarefa;
+
+public class TarefasDAO {
+
+	private Tarefa tarefa;
+
+	public TarefasDAO() {
+	}
+
+	public TarefasDAO(Tarefa tarefa) {
+		this.tarefa = tarefa;
+	}
+
+	public void gravar() {
+		try {
+			FileFactory ff = new FileFactory();
+			ff.getBufferWriterTarefas().write(tarefa.toString());
+			ff.getBufferWriterTarefas().flush();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public List<Tarefa> listar() {
+
+		List<Tarefa> tarefas = new ArrayList<Tarefa>();
+
+		try {
+			FileFactory ff = new FileFactory();
+			BufferedReader br = ff.getBufferedReaderTarefas();
+
+			String linha = "";
+
+			br.readLine();
+
+			while (linha != null) {
+				// Extraíndo uma linha do arquivo
+				linha = br.readLine();
+				System.out.println(linha);
+
+				// Criando vetor que guarda cada informação antes da ","
+				if (linha != null) {
+					String TarefaStr[] = linha.split(",");
+
+					// Criando um objeto tarefa
+					Tarefa tarefa = new Tarefa();
+					tarefa.setCodigo(TarefaStr[0]);
+					tarefa.setTitulo(TarefaStr[1]);
+					tarefa.setResponsavel(TarefaStr[7]);
+
+					tarefas.add(tarefa);
+				}
+
+			}
+
+			return tarefas;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+}
