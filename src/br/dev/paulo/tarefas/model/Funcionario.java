@@ -9,13 +9,13 @@ public class Funcionario {
 	private String cargo;
 	private double salario;
 
-	// método construtor
+	// metodo construtor
 	public Funcionario(String nome) {
 		this.nome = nome;
 		this.matricula = Utils.gerarUUID8();
 	}
 
-	// Construtor Padrão / Default
+	// Construtor Default ou seja padrão
 	public Funcionario() {
 		this.matricula = Utils.gerarUUID8();
 	}

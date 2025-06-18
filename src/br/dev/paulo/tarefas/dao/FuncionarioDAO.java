@@ -45,15 +45,13 @@ public class FuncionarioDAO {
 			br.readLine();
 
 			while (linha != null) {
-				
+
 				linha = br.readLine();
 				System.out.println(linha);
 
-				
 				if (linha != null) {
 					String funcionarioStr[] = linha.split(",");
 
-					
 					Funcionario funcionario = new Funcionario();
 					funcionario.setMatricula(funcionarioStr[0]);
 					funcionario.setNome(funcionarioStr[1]);
@@ -75,7 +73,7 @@ public class FuncionarioDAO {
 	}
 
 	public String[] getNomesFuncionarios() {
-		List<Funcionario> funcionarios = listar(); 
+		List<Funcionario> funcionarios = listar();
 		String[] nomes = new String[funcionarios.size()];
 
 		for (int i = 0; i < funcionarios.size(); i++) {
